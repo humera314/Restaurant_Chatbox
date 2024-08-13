@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'myapp/style.css' %}">
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <img src="{% static 'myapp/logo.png' %}" alt="FoodieBot Logo">
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+        </div>
+        <div class="nav-buttons">
+            {% if user.is_authenticated %}
+                <span>Welcome, {{ user.username }}</span>
+                <button onclick="location.href='{% url 'logout' %}'">Log Out</button>
+            {% else %}
+                <button onclick="location.href='{% url 'login' %}'">Sign In</button>
+                <button onclick="location.href='{% url 'signup' %}'">Sign Up</button>
+            {% endif %}
+        </div>
+    </nav>
+    <div class="welcome-banner">
+        <h1>Welcome to the ABC Restaurant Foodiebot</h1>
+    </div>
+    <div class="main-content">
+        <div class="left-card">
+            <h2>Hi! This is FoodieBot, Restaurant Management Bot. How can I help you?</h2>
+            <div class="button-group">
+                <button onclick="location.href='{% url 'menu' %}'">Menu</button>
+                <button onclick="location.href='{% url 'popular_menu' %}'">Popular Menu</button>
+                <button onclick="location.href='{% url 'order' %}'">Order</button>
+                <button onclick="location.href='{% url 'reorder' %}'">Re Order</button>
+                <button onclick="location.href='{% url 'review' %}'">Review</button>
+                <button onclick="location.href='{% url 'know_the_food_taste' %}'">Know the Food Taste</button>
+                <button onclick="location.href='{% url 'reserve_table' %}'">Reservation</button>
+                <button onclick="location.href='{% url 'location' %}'">Location</button>
+            </div>
+            
+            {% if not user.is_authenticated %}
+            <div class="employee-section">
+                <h3>For Employee</h3>
+                <button onclick="location.href='{% url 'admin_login' %}'">Admin</button>
+                <button onclick="location.href='{% url 'manager' %}'">Manager</button>
+                <button onclick="location.href='{% url 'staff' %}'">Staff</button>
+            </div>
+            {% endif %}
+        
+            <!-- Content for logged-in users -->
+            {% if user.is_authenticated %}
+            <div class="user-section">
+                <h3>Welcome, {{ user.username }}</h3>
+                <button onclick="location.href='{% url 'logout' %}'">Logout</button>
+                <!-- Other content for logged-in users -->
+            </div>
+            {% endif %}
+            <div class="chatbot-section">
+                <p>Any other query? Ask here please:</p>
+                <input type="text" placeholder="Type your query here...">
+                <button>Search</button>
+            </div>
+        </div>
+        <div class="right-card">
+            <h2>Our Story</h2>
+            <p>Four friends collaborated on their final project, crafting a restaurant chatbot, "FoodieBot," to enhance dining experiences. Combining programming, design, and marketing skills, they developed features like menu inquiries, reservations, and personalized recommendations. Launched successfully, their journey inspired innovation, leaving a lasting impact on technology and gastronomy.</p>
+            <img src="{% static 'myapp/food.jpg' %}" alt="Food Picture">
+            <div class="contact-info">
+                <p>Call us: +4 38928 2920</p>
+                <p>Email: foodiebot@gmail.com</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,138 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FF8C00;
+    padding: 1em;
+    color: white;
+}
+
+.logo img {
+    height: 50px;
+}
+
+.search-bar input {
+    padding: 0.5em;
+    border-radius: 5px;
+    border: none;
+    width: 200px;
+}
+
+.nav-buttons button {
+    margin-left: 1em;
+    padding: 0.5em 1em;
+    border: none;
+    background-color: #fff;
+    color: #FF8C00;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.welcome-banner {
+    background-color: #FFEFD5;
+    text-align: center;
+    padding: 1em 0;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #FF0000;
+}
+
+.main-content {
+    display: flex;
+    justify-content: space-between;
+    padding: 2em;
+}
+
+.left-card, .right-card {
+    width: 48%;
+    background-color: white;
+    padding: 2em;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.left-card h2 {
+    color: #FF8C00;
+}
+
+.button-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.button-group button, .employee-section button {
+    padding: 1em;
+    background-color: #FF8C00;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.employee-section {
+    margin-top: 2em;
+}
+
+.employee-section h3 {
+    color: #FF8C00;
+    margin-bottom: 10px;
+}
+
+.chatbot-section {
+    margin-top: 2em;
+    text-align: center;
+}
+
+.chatbot-section p {
+    margin-bottom: 0.5em;
+}
+
+.chatbot-section input {
+    width: calc(100% - 100px);
+    padding: 0.5em;
+    margin-right: 1em;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.chatbot-section button {
+    padding: 0.5em 1em;
+    background-color: #FF8C00;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.right-card h2 {
+    color: #FF0000;
+    margin-bottom: 1em;
+}
+
+.right-card p {
+    color: #FF8C00;
+    line-height: 1.5;
+}
+
+.right-card img {
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 1em;
+}
+
+.contact-info {
+    margin-top: 1em;
+    color: #FF8C00;
+}
+
+.contact-info p {
+    margin: 0.5em 0;
+}

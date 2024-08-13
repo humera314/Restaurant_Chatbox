@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Orders</title>
+</head>
+<body>
+    <h2>Manage Orders</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>User</th>
+            <th>Total</th>
+            <th>Actions</th>
+        </tr>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.id }}</td>
+            <td>{{ order.user.username }}</td>
+            <td>{{ order.total }}</td>
+            <td>
+                <a href="#">Edit</a>
+                <a href="#">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

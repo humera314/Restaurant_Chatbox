@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'myapp/menu_style.css' %}">
+    <script>
+        function loadSelectedItems() {
+            let selectedItems = JSON.parse(localStorage.getItem('selectedItems')) || [];
+            selectedItems.forEach(item => {
+                let checkbox = document.querySelector(`input[name="items"][value="${item.name}|${item.price}"]`);
+                if (checkbox) {
+                    checkbox.checked = true;
+                }
+            });
+        }
+
+        function saveSelectedItems() {
+            let selectedItems = JSON.parse(localStorage.getItem('selectedItems')) || [];
+            document.querySelectorAll('input[name="items"]:checked').forEach(checkbox => {
+                let [name, price] = checkbox.value.split('|');
+                let itemExists = selectedItems.find(item => item.name === name && item.price === parseFloat(price));
+                if (!itemExists) {
+                    selectedItems.push({ name: name, price: parseFloat(price), quantity: 1 });
+                }
+            });
+
+            document.querySelectorAll('input[name="items"]:not(:checked)').forEach(checkbox => {
+                let [name, price] = checkbox.value.split('|');
+                selectedItems = selectedItems.filter(item => !(item.name === name && item.price === parseFloat(price)));
+            });
+
+            localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
+        }
+
+        document.addEventListener('DOMContentLoaded', loadSelectedItems);
+
+        function submitForm() {
+            saveSelectedItems();
+            window.location.href = '{% url "order" %}';
+        }
+    </script>
+</head>
+<body>
+    <nav>
+        <button onclick="location.href='{% url 'home' %}'">Home</button>
+    </nav>
+    <div class="category-nav">
+        {% for category in categories %}
+        <button onclick="location.href='{% url 'menu_category' category.name %}'" class="{% if category.name == current_category %}active{% endif %}">{{ category.name }}</button>
+        {% endfor %}
+    </div>
+    <h1>{{ current_category }}</h1>
+    <form id="menu-form">
+        <div class="menu-container">
+            {% for item in items %}
+            <div class="menu-item">
+                <img src="{{ item.image.url }}" alt="{{ item.name }}">
+                <div class="item-details">
+                    <h2>{{ item.name }} <span>({{ item.size }})</span></h2>
+                    <div class="tags">
+                        {% if item.special %}
+                        <span class="tag">{{ item.special }}</span>
+                        {% endif %}
+                    </div>
+                    <p class="price">${{ item.price }}</p>
+                    <label>
+                        <input type="checkbox" name="items" value="{{ item.name }}|{{ item.price }}" onclick="saveSelectedItems()"> Select
+                    </label>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="order-section">
+            <button type="button" class="order-button" onclick="submitForm()">Place Order</button>
+        </div>
+    </form>
+</body>
+</html>
